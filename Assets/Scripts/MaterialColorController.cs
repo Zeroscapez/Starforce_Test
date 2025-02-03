@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class MaterialColorController : MonoBehaviour
 {
-   [Header("Color Settings")]
-   [Tooltip("Shader property name for color modification")]
+    [Header("Color Settings")]
+    [Tooltip("Shader property name for color modification")]
+    public string colorProperty = "_Color";
+    private void Update()
+    {
+        
+    }
 }
