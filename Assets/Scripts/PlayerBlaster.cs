@@ -5,21 +5,29 @@ using UnityEngine.InputSystem;
 public class PlayerBlaster : MonoBehaviour
 {
     [Header("Settings")]
-    public float baseDamage = 1f;
-    public float maxChargeDamage = 10f;
-    public float chargeRate = 15f; // Damage per second charged
-    public float spamPenalty = 5f; // Damage lost if fired too quickly
+    public float baseDamage = 1f; //Damage when spammed
+    public float maxChargeDamage = 10f; //Max damage at full charge
+    public float chargeTime = 10f; //Time it takes to charge to max damage
 
     private float currentCharge = 0f;
+
     private bool isCharging = true;
 
+   
+
+    private void Start()
+    {
+      
+    }
     void Update()
     {
         if (isCharging)
         {
-            // Increase charge over time, clamped to max damage
-            currentCharge = Mathf.Clamp(currentCharge + chargeRate * Time.deltaTime, 0, maxChargeDamage);
+            // Increase charge until reaching max charge time
+            currentCharge = Mathf.Min(currentCharge + Time.deltaTime, chargeTime);
         }
+
+     
     }
 
     public void OnFire(InputAction.CallbackContext context)
@@ -33,14 +41,9 @@ public class PlayerBlaster : MonoBehaviour
     void Fire()
     {
         // Calculate final damage
-        float finalDamage = maxChargeDamage;
+        float damage = currentCharge >= chargeTime ? maxChargeDamage : baseDamage;
 
-        // Apply spam penalty (reset charge if fired too quickly)
-        if (currentCharge < maxChargeDamage)
-        {
-            finalDamage -= spamPenalty;
-            finalDamage = Mathf.Max(finalDamage, baseDamage); // Never go below base
-        }
+     
 
         // Get the player's current column
         int playerColumn = GridManager.Instance.GetColumnIndex(transform.position);
@@ -52,7 +55,7 @@ public class PlayerBlaster : MonoBehaviour
             int enemyColumn = GridManager.Instance.GetColumnIndex(enemy.transform.position);
             if (enemyColumn == playerColumn)
             {
-                enemy.TakeDamage(finalDamage);
+                enemy.TakeDamage(damage);
             }
         }
 
@@ -61,5 +64,8 @@ public class PlayerBlaster : MonoBehaviour
         isCharging = true;
     }
 
-    // Optional: Add a cooldown system here if needed
+    public float GetChargeProgress()
+    {
+        return currentCharge / chargeTime;
+    }
 }

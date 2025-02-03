@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c7b5a3fbf3a30c43b0776bc4ad1271d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
+  maxHealth: 100
   hpText: {fileID: 6147746921058410569}
   currentHP: 100
   flashMaterial: {fileID: 2100000, guid: 7296752b43a4a7f46b8c04709ff39c39, type: 2}
