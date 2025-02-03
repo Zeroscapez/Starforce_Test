@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 public class PlayerBlaster : MonoBehaviour
 {
     [Header("Settings")]
-    public float baseDamage = 10f;
-    public float maxChargeDamage = 30f;
+    public float baseDamage = 1f;
+    public float maxChargeDamage = 10f;
     public float chargeRate = 15f; // Damage per second charged
     public float spamPenalty = 5f; // Damage lost if fired too quickly
 
@@ -33,7 +33,7 @@ public class PlayerBlaster : MonoBehaviour
     void Fire()
     {
         // Calculate final damage
-        float finalDamage = baseDamage + currentCharge;
+        float finalDamage = maxChargeDamage;
 
         // Apply spam penalty (reset charge if fired too quickly)
         if (currentCharge < maxChargeDamage)
