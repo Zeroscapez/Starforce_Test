@@ -13,6 +13,8 @@ public class PlayerBlaster : MonoBehaviour
 
     private bool isCharging = true;
 
+    public NoiseManager noiseManager;
+
    
 
     private void Start()
@@ -56,6 +58,7 @@ public class PlayerBlaster : MonoBehaviour
             if (enemyColumn == playerColumn)
             {
                 enemy.TakeDamage(damage);
+                noiseManager.NoiseGain(damage);
             }
         }
 
