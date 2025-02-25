@@ -54,7 +54,7 @@ public class PlayerBlaster : MonoBehaviour
 
         // Get the player's current column
         int playerColumn = GridManager.Instance.GetColumnIndex(transform.position);
-        Debug.Log(playerColumn);
+       // Debug.Log(playerColumn);
         // Loop through registered enemies (using a copy in case the list is modified)
         List<EnemyHealth> enemies = new List<EnemyHealth>(GridManager.Instance.registeredEnemies);
 

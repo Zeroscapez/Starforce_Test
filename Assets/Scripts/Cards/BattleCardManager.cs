@@ -242,7 +242,7 @@ public class BattleCardManager : MonoBehaviour
                 {
                     // Get the player's current column
                     int playerColumn = GridManager.Instance.GetColumnIndex(playerTransform.position);
-                    Debug.Log(playerColumn);
+                    //Debug.Log(playerColumn);
 
                     // Loop through registered enemies (using a copy in case the list is modified)
                     List<EnemyHealth> enemies = new List<EnemyHealth>(GridManager.Instance.registeredEnemies);
@@ -264,7 +264,7 @@ public class BattleCardManager : MonoBehaviour
                             enemyColumn = GridManager.Instance.GetColumnIndex(enemy.transform.position);
                         }
 
-                        Debug.Log(enemyColumn);
+                       // Debug.Log(enemyColumn);
                         // Check if the enemy is in the same column
                         if (enemyColumn == playerColumn)
                         {

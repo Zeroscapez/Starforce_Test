@@ -19,7 +19,7 @@ public class EnemyAI : MonoBehaviour
         int columns = GridManager.Instance.columns;
         int row = currentTileIndex / columns;
         int col = currentTileIndex % columns;
-        Debug.Log(col + "," + row);
+        //Debug.Log(col + "," + row);
         return new Vector2Int(col, row);
 
     }
