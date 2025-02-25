@@ -4,15 +4,28 @@ public class EnemyAI : MonoBehaviour
 {
     [Header("Grid Settings")]
     public float moveInterval = 3f; // Time between moves
-    public int minRow = 1; // Start at Row 1 (front row is Row 0 for the player)
+    public int minRow = 1; // For enemies, front row is Row 0 (player's row) so start at Row 1
     public int maxRow = 4; // Adjust based on your grid size
 
     private float timer;
     private int currentTileIndex;
 
+    // Expose the current tile index publicly.
+    public int CurrentTileIndex { get { return currentTileIndex; } }
+
+    // Returns grid position as (column, row)
+    public Vector2Int GetGridPosition()
+    {
+        int columns = GridManager.Instance.columns;
+        int row = currentTileIndex / columns;
+        int col = currentTileIndex % columns;
+        Debug.Log(col + "," + row);
+        return new Vector2Int(col, row);
+
+    }
+
     void Start()
     {
-        // Start at a random valid tile
         currentTileIndex = GetRandomValidTileIndex();
         SnapToTile(currentTileIndex);
     }
@@ -28,23 +41,16 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    // Get a random tile index within allowed rows/columns
     int GetRandomValidTileIndex()
     {
         int columns = GridManager.Instance.columns;
         int rows = GridManager.Instance.rows;
-
-        // Randomly pick a row (between minRow and maxRow)
         int randomRow = Random.Range(minRow, maxRow + 1);
-        // Randomly pick a column (0 to 2 for 3 columns)
         int randomColumn = Random.Range(0, columns);
-
-        // Convert row/column to gridTiles index (row-major order)
         int index = (randomRow * columns) + randomColumn;
         return index;
     }
 
-    // Move smoothly or instantly to the target tile
     void SnapToTile(int index)
     {
         if (index >= 0 && index < GridManager.Instance.gridTiles.Count)

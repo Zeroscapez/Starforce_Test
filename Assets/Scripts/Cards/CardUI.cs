@@ -29,7 +29,7 @@ public class CardUI : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("Clicked: " + battleCard.cardName);
+       // Debug.Log("Clicked: " + battleCard.cardName);
         cardManager.HandleCardClick(this);
     }
 }

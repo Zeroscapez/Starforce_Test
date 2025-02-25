@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -49,13 +50,27 @@ public class PlayerBlaster : MonoBehaviour
 
         // Get the player's current column
         int playerColumn = GridManager.Instance.GetColumnIndex(transform.position);
+        Debug.Log(playerColumn);
+        // Loop through registered enemies (using a copy in case the list is modified)
+        List<EnemyHealth> enemies = new List<EnemyHealth>(GridManager.Instance.registeredEnemies);
 
         // Damage logic
-        for (int i = GridManager.Instance.enemies.Count - 1; i >= 0; i--)
+        foreach (EnemyHealth enemy in enemies)
         {
-            EnemyHealth enemy = GridManager.Instance.enemies[i];
-            int enemyColumn = GridManager.Instance.GetColumnIndex(enemy.transform.position);
-            if (enemyColumn == playerColumn)
+            EnemyAI enemyAI = enemy.GetComponent<EnemyAI>();
+            int enemyColumn = 0;
+
+            if (enemyAI != null)
+            {
+                Vector2Int enemyGridPos = enemyAI.GetGridPosition();
+                enemyColumn = enemyGridPos.x;
+            }
+            else
+            {
+                enemyColumn = GridManager.Instance.GetColumnIndex(enemy.transform.position);
+            }
+
+            if(enemyColumn == playerColumn)
             {
                 enemy.TakeDamage(damage);
             }

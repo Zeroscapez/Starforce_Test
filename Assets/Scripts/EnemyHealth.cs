@@ -21,6 +21,7 @@ public class EnemyHealth : MonoBehaviour
         originalMaterial = rend.material;
         currentHealth = maxHealth;
         GridManager.Instance.RegisterEnemy(this);
+
         UpdateHPText();
     }
 
@@ -30,7 +31,11 @@ public class EnemyHealth : MonoBehaviour
         StartCoroutine(FlashEffect()); // Flash on hit
         currentHP -= damage;
         UpdateHPText();
-        if (currentHealth <= 0) Die();
+        if (currentHealth <= 0)
+        {
+            Debug.Log("Die");
+            Die();
+        }
     }
 
     System.Collections.IEnumerator FlashEffect()

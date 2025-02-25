@@ -21,4 +21,4 @@ MonoBehaviour:
   sizeMultiplier: {x: 1, y: 1}
   FXPrefab: {fileID: 0}
   isWhiteCard: 0
-  targetPattern: 1
+  targetPattern: 0
