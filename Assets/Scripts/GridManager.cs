@@ -23,6 +23,11 @@ public class GridManager : MonoBehaviour
     public List<Vector3> gridTiles = new List<Vector3>(); // Center points of cells
     public List<EnemyHealth> enemies = new List<EnemyHealth>();
 
+    public List<EnemyHealth> registeredEnemies = new List<EnemyHealth>();
+    public void RegisterEnemy(EnemyHealth enemy) { registeredEnemies.Add(enemy); }
+    public void UnregisterEnemy(EnemyHealth enemy) { registeredEnemies.Remove(enemy); }
+
+
     void Awake()
     {
         Instance = this;
@@ -126,15 +131,6 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    public void RegisterEnemy(EnemyHealth enemy)
-    {
-        if (!enemies.Contains(enemy)) enemies.Add(enemy);
-    }
-
-    public void UnregisterEnemy(EnemyHealth enemy)
-    {
-        if (enemies.Contains(enemy)) enemies.Remove(enemy);
-    }
 
     void OnDrawGizmos()
     {

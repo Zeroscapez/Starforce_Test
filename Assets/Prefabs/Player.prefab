@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 534186244240591654}
   - component: {fileID: 4859690404411105461}
   - component: {fileID: 6106117822818823877}
+  - component: {fileID: 8724476894220190641}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -214,7 +215,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f29694c06b57fe144aa3cd554eab3c43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 5
-  maxChargeDamage: 15
-  chargeRate: 15
-  spamPenalty: 0
+  baseDamage: 1
+  maxChargeDamage: 10
+  chargeTime: 10
+  chargedColor: {r: 0, g: 1, b: 0, a: 1}
+--- !u!114 &8724476894220190641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3009081480244774621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c3132534a8d9d74aa75c3d9c5c37f3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorProperty: _Color
+  colorChangeSpeed: 0.1
+  useSmoothTransition: 0
