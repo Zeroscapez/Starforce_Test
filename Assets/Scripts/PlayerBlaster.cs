@@ -14,6 +14,10 @@ public class PlayerBlaster : MonoBehaviour
     private bool isCharging = true;
     private MaterialColorController colorController;
 
+    public NoiseManager noiseManager;
+
+   
+
     private void Start()
     {
         // Get the material color controller
@@ -73,6 +77,7 @@ public class PlayerBlaster : MonoBehaviour
             if(enemyColumn == playerColumn)
             {
                 enemy.TakeDamage(damage);
+                noiseManager.NoiseGain(damage);
             }
         }
 
