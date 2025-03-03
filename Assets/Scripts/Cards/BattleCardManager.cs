@@ -194,6 +194,7 @@ public class BattleCardManager : MonoBehaviour
         {
             //Debug.Log(card.battleCard.cardName);
         }
+        AudioManager.Instance.PlaySound("CustomConfirm");
         gridParent.gameObject.SetActive(false);
         customScreen.gameObject.SetActive(false);
         selectionFinalized = true;

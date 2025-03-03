@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
@@ -34,6 +35,16 @@ public class GridManager : MonoBehaviour
         CalculateGridCenters();
         InitializePool();
         CreateGridVisuals();
+    }
+
+    private void Update()
+    {
+        if (registeredEnemies.Count <= 0) 
+        {
+           
+            AudioManager.Instance.PlaySound("VictorySong");
+        
+        }
     }
 
     void CalculateGridCenters()

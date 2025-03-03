@@ -1,6 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerBlaster : MonoBehaviour
 {
@@ -9,6 +11,15 @@ public class PlayerBlaster : MonoBehaviour
     public float maxChargeDamage = 10f;   // Max damage at full charge
     public float chargeTime = 10f;        // Time to reach full charge
     public Color chargedColor = Color.green;
+    public Image chargetracker;
+
+    public int flashCount;
+    public float flashDuration;
+
+    public AudioClip blasterFireSound;
+    public AudioClip blasterFullChargeSound;
+
+
 
     private float currentCharge = 0f;
     private bool isCharging = true;
@@ -16,12 +27,20 @@ public class PlayerBlaster : MonoBehaviour
 
     public NoiseManager noiseManager;
 
-   
+
+    private Color originalChargeTrackerColor;
+    private bool hasFlashedChargetracker = false;
+    private bool hasPlayedFullyChargedSound = false;
 
     private void Start()
     {
         // Get the material color controller
         colorController = GetComponent<MaterialColorController>();
+        if (chargetracker != null)
+        {
+            originalChargeTrackerColor = chargetracker.color;
+            chargetracker.fillAmount = 0f;
+        }
     }
 
     void Update()
@@ -30,11 +49,27 @@ public class PlayerBlaster : MonoBehaviour
         {
             // Increase charge until reaching max charge time
             currentCharge = Mathf.Min(currentCharge + Time.deltaTime, chargeTime);
+            if (chargetracker != null)
+            {
+                chargetracker.fillAmount = GetChargeProgress();
+            }
+                
 
-            // Update color when fully charged
-            if (currentCharge >= chargeTime)
+            // When fully charged, change color and flash the tracker if not already done
+            if (currentCharge >= chargeTime && !hasFlashedChargetracker)
             {
                 colorController.ChangeColor(chargedColor);
+
+                if (!hasPlayedFullyChargedSound && blasterFullChargeSound != null)
+                {
+                    AudioManager.Instance.PlaySound("BlasterFullSound");
+
+                    hasPlayedFullyChargedSound = true;
+                }
+
+
+                StartCoroutine(FlashTracker());
+                hasFlashedChargetracker = true;
             }
         }
     }
@@ -51,6 +86,11 @@ public class PlayerBlaster : MonoBehaviour
     {
         // Calculate final damage
         float damage = currentCharge >= chargeTime ? maxChargeDamage : baseDamage;
+
+        if (blasterFireSound != null)
+        {
+            AudioManager.Instance.PlaySound("BlasterFireSound");
+        }
 
         // Get the player's current column
         int playerColumn = GridManager.Instance.GetColumnIndex(transform.position);
@@ -81,14 +121,44 @@ public class PlayerBlaster : MonoBehaviour
             }
         }
 
-        // Reset system
+        //Reset
         currentCharge = 0f;
         isCharging = true;
-        colorController.ResetColors(); // Return to original color
-    }
+        colorController.ResetColors();
+        if (chargetracker != null)
+        {
+            chargetracker.fillAmount = 0f;
+            chargetracker.color = originalChargeTrackerColor;
+        }
+        hasFlashedChargetracker = false;
+        hasPlayedFullyChargedSound = false;
+}
 
     public float GetChargeProgress()
     {
         return currentCharge / chargeTime;
     }
-}
+
+    IEnumerator FlashTracker()
+    {
+        flashCount = 2;
+        flashDuration = 0.1f;
+
+        for (int i = 0; i < flashCount; i++) {
+            if (chargetracker != null)
+            {
+                chargetracker.color = Color.white;
+            }
+            yield return new WaitForSecondsRealtime(flashDuration);
+            if (chargetracker != null)
+            {
+                chargetracker.color = chargedColor;
+            }
+            yield return new WaitForSecondsRealtime(flashDuration);
+        }
+        // Ensure it ends on the charged color
+        if (chargetracker != null)
+            chargetracker.color = chargedColor;
+    }
+
+    }

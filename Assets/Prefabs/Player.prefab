@@ -219,6 +219,7 @@ MonoBehaviour:
   maxChargeDamage: 10
   chargeTime: 10
   chargedColor: {r: 0, g: 1, b: 0, a: 1}
+  noiseManager: {fileID: 0}
 --- !u!114 &8724476894220190641
 MonoBehaviour:
   m_ObjectHideFlags: 0
