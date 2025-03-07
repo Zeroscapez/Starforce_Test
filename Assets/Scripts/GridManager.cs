@@ -28,6 +28,7 @@ public class GridManager : MonoBehaviour
     public void RegisterEnemy(EnemyHealth enemy) { registeredEnemies.Add(enemy); }
     public void UnregisterEnemy(EnemyHealth enemy) { registeredEnemies.Remove(enemy); }
 
+    private bool VictoryPlay = false;
 
     void Awake()
     {
@@ -37,13 +38,20 @@ public class GridManager : MonoBehaviour
         CreateGridVisuals();
     }
 
+    private void Start()
+    {
+        AudioManager.Instance.PlayBGM("BattleTheme1");
+    }
+
     private void Update()
     {
-        if (registeredEnemies.Count <= 0) 
+        if (registeredEnemies.Count <= 0 && !VictoryPlay) 
         {
-           
-            AudioManager.Instance.PlaySound("VictorySong");
-        
+           VictoryPlay = true;
+           AudioManager.Instance.PlaySongSequence("VictorySongStart", "VictorySongLoop");
+
+            
+            
         }
     }
 

@@ -62,7 +62,7 @@ public class PlayerBlaster : MonoBehaviour
 
                 if (!hasPlayedFullyChargedSound && blasterFullChargeSound != null)
                 {
-                    AudioManager.Instance.PlaySound("BlasterFullSound");
+                    AudioManager.Instance.PlaySFX("BlasterFull");
 
                     hasPlayedFullyChargedSound = true;
                 }
@@ -89,7 +89,7 @@ public class PlayerBlaster : MonoBehaviour
 
         if (blasterFireSound != null)
         {
-            AudioManager.Instance.PlaySound("BlasterFireSound");
+            AudioManager.Instance.PlaySFX("BlasterFire");
         }
 
         // Get the player's current column
