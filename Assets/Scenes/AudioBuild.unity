@@ -5254,9 +5254,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 553808239}
-  - component: {fileID: 553808240}
   m_Layer: 0
-  m_Name: SongPlayer
+  m_Name: BGM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5277,18 +5276,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1803237236}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &553808240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 553808238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f001c533e1f6ffa46b3e05d8cd0c0829, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &655305699
 GameObject:
   m_ObjectHideFlags: 0
@@ -5748,6 +5735,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1036697880}
   m_CullTransparentMesh: 1
+--- !u!1 &1046588239
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1046588241}
+  - component: {fileID: 1046588240}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1046588240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046588239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebe92fe3861f2c94087a42c96990c697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1046588241
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046588239}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 375.8968, y: 375.89, z: -224.66263}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1803237236}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1196957491
 GameObject:
   m_ObjectHideFlags: 0
@@ -6132,6 +6164,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1256399212}
   m_CullTransparentMesh: 1
+--- !u!1 &1310011239
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1310011240}
+  m_Layer: 0
+  m_Name: SFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1310011240
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310011239}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1803237236}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1344207164
 GameObject:
   m_ObjectHideFlags: 0
@@ -6651,16 +6714,32 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1803237236}
-  - component: {fileID: 1803237234}
-  - component: {fileID: 1803237235}
+  - component: {fileID: 1803237237}
   m_Layer: 0
-  m_Name: Audio Source
+  m_Name: Audio Sources
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1803237234
+--- !u!4 &1803237236
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803237233}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 553808239}
+  - {fileID: 1310011240}
+  m_Father: {fileID: 1046588241}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1803237237
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6672,137 +6751,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5fb91039ff3c744bacd400c401dc005, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundClips:
-  - name: BlasterFireSound
-    clip: {fileID: 8300000, guid: 8ba1021bd0345a942a4d949172c65a3e, type: 3}
-    volume: 0.4
-  - name: BlasterFullSound
-    clip: {fileID: 8300000, guid: 68c5d869a1b76ef4db83061eb990fdcf, type: 3}
-    volume: 1
-  - name: CustomConfirm
-    clip: {fileID: 8300000, guid: 6984d9e564cb2c049984390e9a3723b5, type: 3}
-    volume: 1
-  - name: CombatThemeBase
+  bgmSounds:
+  - name: BattleTheme1
     clip: {fileID: 8300000, guid: 1400c02dc18b3444c9c389619d358740, type: 3}
     volume: 1
-  - name: VictorySong
-    clip: {fileID: 8300000, guid: 12dc7a0ccad40894581b1f023e3c9ddf, type: 3}
-    volume: 0.129
-  - name: Null
-    clip: {fileID: 8300000, guid: 866ede52a5133f5419179da5a45e190f, type: 3}
-    volume: 0
---- !u!82 &1803237235
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1803237233}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!4 &1803237236
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1803237233}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 375.8968, y: 375.89, z: -224.66263}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 553808239}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+    loop: 1
+    mixerGroup: {fileID: -9025475995060543152, guid: fa0285f82e09f81458a76561e574762c, type: 2}
+  - name: VictorySongStart
+    clip: {fileID: 8300000, guid: c675ec269ab14094892aef447a512b16, type: 3}
+    volume: 1
+    loop: 0
+    mixerGroup: {fileID: -9025475995060543152, guid: fa0285f82e09f81458a76561e574762c, type: 2}
+  - name: VictorySongLoop
+    clip: {fileID: 8300000, guid: d3a86a531d8b0244786d1dfd65c67ce1, type: 3}
+    volume: 1
+    loop: 1
+    mixerGroup: {fileID: -9025475995060543152, guid: fa0285f82e09f81458a76561e574762c, type: 2}
+  sfxSounds:
+  - name: BlasterFire
+    clip: {fileID: 8300000, guid: 8ba1021bd0345a942a4d949172c65a3e, type: 3}
+    volume: 1
+    loop: 0
+    mixerGroup: {fileID: 9140721492092172137, guid: fa0285f82e09f81458a76561e574762c, type: 2}
+  - name: BlasterFull
+    clip: {fileID: 8300000, guid: fb80945357b14fc429d972b47d6a2d41, type: 3}
+    volume: 1
+    loop: 0
+    mixerGroup: {fileID: 9140721492092172137, guid: fa0285f82e09f81458a76561e574762c, type: 2}
+  - name: CustomConfirm
+    clip: {fileID: 8300000, guid: a5a2b80cdb4c5a44da7f2842b92a3786, type: 3}
+    volume: 1
+    loop: 0
+    mixerGroup: {fileID: 9140721492092172137, guid: fa0285f82e09f81458a76561e574762c, type: 2}
+  masterVolume: 1
 --- !u!4 &1819852657 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5822011656539124638, guid: 4438aebc9eb9e45468da95ee347b7919, type: 3}
@@ -7229,4 +7210,4 @@ SceneRoots:
   - {fileID: 115309536}
   - {fileID: 376941314}
   - {fileID: 1407011241}
-  - {fileID: 1803237236}
+  - {fileID: 1046588241}
