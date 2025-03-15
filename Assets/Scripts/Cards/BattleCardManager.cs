@@ -16,14 +16,16 @@ public class BattleCardManager : MonoBehaviour
 
     // Lists to keep track of instantiated cards and selected cards.
     private List<CardUI> cardUIs = new List<CardUI>();
-    [SerializeField] private List<CardUI> selectedCards = new List<CardUI>();
+    [SerializeField] public List<CardUI> selectedCards = new List<CardUI>();
 
     private bool selectionFinalized = false;
     private bool combatPaused = false;
+    private DeckViewControl deckViewControl;
 
     private void Start()
     {
         customScreen.gameObject.SetActive(false);
+        deckViewControl = FindObjectOfType<DeckViewControl>();
     }
 
     void Update()
@@ -198,6 +200,7 @@ public class BattleCardManager : MonoBehaviour
         gridParent.gameObject.SetActive(false);
         customScreen.gameObject.SetActive(false);
         selectionFinalized = true;
+        deckViewControl.UpdateDeckView();
         ResumeCombat();
     }
 
@@ -207,6 +210,7 @@ public class BattleCardManager : MonoBehaviour
         {
             CardUI card = selectedCards[0];
             selectedCards.RemoveAt(0);
+            deckViewControl.UpdateDeckView();
             int damage = card.battleCard.damage;
            // Debug.Log("Using card: " + card.battleCard.cardName + " for " + damage + " damage.");
 
