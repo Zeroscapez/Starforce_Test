@@ -9,9 +9,9 @@ public class GridManager : MonoBehaviour
     [Header("Grid Settings")]
     public int rows = 5;          // Total rows (front to back)
     public int columns = 3;       // Total columns (left to right)
-    public float cellSize = 2f;   // Spacing between tiles
-    public Vector3 gridOrigin = new Vector3(-2f, 0, 0); // Front-left corner of grid
-    public float gridCellOffsetY = -0.1f; // Visual offset below gameplay positions
+    private float cellSize = 3f;   // Spacing between tiles
+    private Vector3 gridOrigin = new Vector3(0, 0, 0); // Front-left corner of grid
+    private float gridCellOffsetY = -1.5f; // Visual offset below gameplay positions
 
     [Header("Prefabs")]
     public GameObject gridCellPrefab; // Should have centered pivot
