@@ -17,12 +17,12 @@ public class PlayerMovement : MonoBehaviour
     {
         // Initialize Input System
         playerControls = new PlayerControls();
-        moveAction = playerControls.Gameplay.MoveLeftRight;
+        moveAction = InputSystem.actions.FindAction("Player/Move");
     }
 
     void OnEnable()
     {
-        playerControls.Gameplay.Enable();
+       
         moveAction.performed += HandleMovement;
     }
 
@@ -41,15 +41,25 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        SmoothMove();
+     
     }
 
     // Handle left/right input
     private void HandleMovement(InputAction.CallbackContext context)
     {
-        float moveInput = context.ReadValue<float>();
-        if (moveInput < 0) MoveToTile(currentTileIndex - 1); // Left
-        else if (moveInput > 0) MoveToTile(currentTileIndex + 1); // Right
+        Debug.Log("Move input received: " + context.ReadValue<Vector2>());
+        Vector2 moveInput = context.ReadValue<Vector2>();
+
+        //If move is left move to the tile left of the current tile, if move is right move to the tile right of the current tile
+        if (moveInput.x < 0)
+        {
+            MoveToTile(currentTileIndex - 1);
+        }
+        else if (moveInput.x > 0)
+        {
+            MoveToTile(currentTileIndex + 1);
+        }
+      
     }
 
     private void MoveToTile(int newIndex)
@@ -59,11 +69,10 @@ public class PlayerMovement : MonoBehaviour
         {
             currentTileIndex = newIndex;
             targetPosition = GridManager.Instance.gridTiles[currentTileIndex];
+            transform.position = targetPosition; // Snap immediately to the new tile
         }
+      
     }
 
-    private void SmoothMove()
-    {
-        transform.position = Vector3.Lerp(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-    }
+   
 }

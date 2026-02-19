@@ -6,7 +6,7 @@ public class EnemyAI : MonoBehaviour
     public float moveInterval = 3f; // Time between moves
     public int minRow = 1; // For enemies, front row is Row 0 (player's row) so start at Row 1
     public int maxRow = 4; // Adjust based on your grid size
-
+    private EnemyHealth health;
     private float timer;
     private int currentTileIndex;
 
@@ -26,8 +26,10 @@ public class EnemyAI : MonoBehaviour
 
     void Start()
     {
+        health = GetComponent<EnemyHealth>();
         currentTileIndex = GetRandomValidTileIndex();
         SnapToTile(currentTileIndex);
+        BattleManager.Instance.RegisterEnemies(this);
     }
 
     void Update()
@@ -56,6 +58,15 @@ public class EnemyAI : MonoBehaviour
         if (index >= 0 && index < GridManager.Instance.gridTiles.Count)
         {
             transform.position = GridManager.Instance.gridTiles[index];
+        }
+    }
+
+    void Die()
+    {
+        if(health.GetCurrentHealth() <= 0)
+        {
+            BattleManager.Instance.UnregisterEnemies(this);
+            Destroy(gameObject);
         }
     }
 }

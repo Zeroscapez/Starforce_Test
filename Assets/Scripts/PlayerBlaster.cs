@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -34,6 +35,7 @@ public class PlayerBlaster : MonoBehaviour
 
     private void Start()
     {
+        noiseManager = GetComponent<NoiseManager>();
         // Get the material color controller
         colorController = GetComponent<MaterialColorController>();
         if (chargetracker != null)
@@ -87,6 +89,7 @@ public class PlayerBlaster : MonoBehaviour
         // Calculate final damage
         float damage = currentCharge >= chargeTime ? maxChargeDamage : baseDamage;
 
+        
         if (blasterFireSound != null)
         {
             AudioManager.Instance.PlaySFX("BlasterFire");
@@ -96,17 +99,17 @@ public class PlayerBlaster : MonoBehaviour
         int playerColumn = GridManager.Instance.GetColumnIndex(transform.position);
        // Debug.Log(playerColumn);
         // Loop through registered enemies (using a copy in case the list is modified)
-        List<EnemyHealth> enemies = new List<EnemyHealth>(GridManager.Instance.registeredEnemies);
+        List<EnemyAI> enemies = new List<EnemyAI>(BattleManager.Instance.enemies);
 
         // Damage logic
-        foreach (EnemyHealth enemy in enemies)
+        foreach (EnemyAI enemy in enemies)
         {
-            EnemyAI enemyAI = enemy.GetComponent<EnemyAI>();
+            EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
             int enemyColumn = 0;
 
-            if (enemyAI != null)
+            if (enemy != null)
             {
-                Vector2Int enemyGridPos = enemyAI.GetGridPosition();
+                Vector2Int enemyGridPos = enemy.GetGridPosition();
                 enemyColumn = enemyGridPos.x;
             }
             else
@@ -116,7 +119,7 @@ public class PlayerBlaster : MonoBehaviour
 
             if(enemyColumn == playerColumn)
             {
-                enemy.TakeDamage(damage);
+                enemyHealth.TakeDamage((int)damage);
                 noiseManager.NoiseGain(damage);
             }
         }

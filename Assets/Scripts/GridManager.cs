@@ -22,13 +22,7 @@ public class GridManager : MonoBehaviour
 
     [Header("Grid Data")]
     public List<Vector3> gridTiles = new List<Vector3>(); // Center points of cells
-    public List<EnemyHealth> enemies = new List<EnemyHealth>();
-
-    public List<EnemyHealth> registeredEnemies = new List<EnemyHealth>();
-    public void RegisterEnemy(EnemyHealth enemy) { registeredEnemies.Add(enemy); }
-    public void UnregisterEnemy(EnemyHealth enemy) { registeredEnemies.Remove(enemy); }
-
-    private bool VictoryPlay = false;
+  
 
     void Awake()
     {
@@ -45,14 +39,7 @@ public class GridManager : MonoBehaviour
 
     private void Update()
     {
-        if (registeredEnemies.Count <= 0 && !VictoryPlay) 
-        {
-           VictoryPlay = true;
-           AudioManager.Instance.PlaySongSequence("VictorySongStart", "VictorySongLoop");
-
-            
-            
-        }
+        
     }
 
     void CalculateGridCenters()
