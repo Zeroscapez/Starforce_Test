@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
@@ -8,9 +9,9 @@ public class GridManager : MonoBehaviour
     [Header("Grid Settings")]
     public int rows = 5;          // Total rows (front to back)
     public int columns = 3;       // Total columns (left to right)
-    public float cellSize = 2f;   // Spacing between tiles
-    public Vector3 gridOrigin = new Vector3(-2f, 0, 0); // Front-left corner of grid
-    public float gridCellOffsetY = -0.1f; // Visual offset below gameplay positions
+    private float cellSize = 3f;   // Spacing between tiles
+    private Vector3 gridOrigin = new Vector3(0, 0, 0); // Front-left corner of grid
+    private float gridCellOffsetY = -1.5f; // Visual offset below gameplay positions
 
     [Header("Prefabs")]
     public GameObject gridCellPrefab; // Should have centered pivot
@@ -21,12 +22,7 @@ public class GridManager : MonoBehaviour
 
     [Header("Grid Data")]
     public List<Vector3> gridTiles = new List<Vector3>(); // Center points of cells
-    public List<EnemyHealth> enemies = new List<EnemyHealth>();
-
-    public List<EnemyHealth> registeredEnemies = new List<EnemyHealth>();
-    public void RegisterEnemy(EnemyHealth enemy) { registeredEnemies.Add(enemy); }
-    public void UnregisterEnemy(EnemyHealth enemy) { registeredEnemies.Remove(enemy); }
-
+  
 
     void Awake()
     {
@@ -34,6 +30,16 @@ public class GridManager : MonoBehaviour
         CalculateGridCenters();
         InitializePool();
         CreateGridVisuals();
+    }
+
+    private void Start()
+    {
+        AudioManager.Instance.PlayBGM("BattleTheme1");
+    }
+
+    private void Update()
+    {
+        
     }
 
     void CalculateGridCenters()

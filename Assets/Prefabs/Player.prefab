@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4859690404411105461}
   - component: {fileID: 6106117822818823877}
   - component: {fileID: 8724476894220190641}
+  - component: {fileID: 2256001734249927449}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -33,7 +34,7 @@ Transform:
   m_GameObject: {fileID: 3009081480244774621}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.5, y: 0, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -64,6 +65,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -85,9 +91,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!135 &3708195230332890465
 SphereCollider:
@@ -125,7 +133,6 @@ CharacterController:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
@@ -177,11 +184,11 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: f2a5ce3f-a789-48b7-ab4a-e5df7a3ce09d
-    m_ActionName: Gameplay/MoveLeftRight[/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+    m_ActionName: 'Gameplay/MoveLeftRight[/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 6c14e421-6af6-4fc8-a001-2b3e2d4044f7
-    m_ActionName: Gameplay/OpenCardMenu[/Keyboard/space]
+    m_ActionName: 'Gameplay/OpenCardMenu[/Keyboard/space]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6106117822818823877}
@@ -197,7 +204,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 6d475cc5-23e4-4e37-a073-70f169c9c0f8
-    m_ActionName: Gameplay/Fire[/Keyboard/z]
+    m_ActionName: 'Gameplay/Fire[/Keyboard/z]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -217,8 +224,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseDamage: 1
   maxChargeDamage: 10
-  chargeTime: 10
+  chargeTime: 5
   chargedColor: {r: 0, g: 1, b: 0, a: 1}
+  chargetracker: {fileID: 0}
+  flashCount: 0
+  flashDuration: 0
+  blasterFireSound: {fileID: 8300000, guid: 8ba1021bd0345a942a4d949172c65a3e, type: 3}
+  blasterFullChargeSound: {fileID: 8300000, guid: 68c5d869a1b76ef4db83061eb990fdcf, type: 3}
+  noiseManager: {fileID: 0}
 --- !u!114 &8724476894220190641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,3 +247,19 @@ MonoBehaviour:
   colorProperty: _Color
   colorChangeSpeed: 0.1
   useSmoothTransition: 0
+--- !u!114 &2256001734249927449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3009081480244774621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e459acbb9898c44a9753b43a1c8dfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noiseGauge: {fileID: 0}
+  noiseMeter: {fileID: 0}
+  totalNoise: 0
+  noiseFloor: 0

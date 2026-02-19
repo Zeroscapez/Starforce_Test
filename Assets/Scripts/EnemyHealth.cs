@@ -1,31 +1,36 @@
 // EnemyHealth.cs
+using System;
 using TMPro;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
     [Header("Settings")]
-    public float maxHealth = 50f;
+    public int maxHealth = 50;
     [SerializeField] private TextMeshProUGUI hpText;
     [SerializeField] private float currentHP = 100f;
     public Material flashMaterial; // White material for flashing
     public float flashDuration = 0.1f;
-
+   
     private Material originalMaterial;
     private Renderer rend;
-    private float currentHealth;
+    private int currentHealth;
+
+
+    public static event Action<EnemyAI> Death;
+
 
     void Start()
     {
         rend = GetComponent<Renderer>();
         originalMaterial = rend.material;
         currentHealth = maxHealth;
-        GridManager.Instance.RegisterEnemy(this);
+       
 
         UpdateHPText();
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         StartCoroutine(FlashEffect()); // Flash on hit
@@ -33,7 +38,7 @@ public class EnemyHealth : MonoBehaviour
         UpdateHPText();
         if (currentHealth <= 0)
         {
-            Debug.Log("Die");
+         
             Die();
         }
     }
@@ -47,7 +52,7 @@ public class EnemyHealth : MonoBehaviour
 
     void Die()
     {
-        GridManager.Instance.UnregisterEnemy(this);
+        Death?.Invoke(GetComponent<EnemyAI>()); // Notify BattleManager of death
         Destroy(gameObject);
     }
 
@@ -55,11 +60,16 @@ public class EnemyHealth : MonoBehaviour
 
     void OnDestroy()
     {
-        GridManager.Instance.UnregisterEnemy(this);
+     
     }
 
     void UpdateHPText()
     {
         hpText.text = currentHP.ToString("0"); // Show HP as integer
+    }
+
+    public int GetCurrentHealth()
+    {
+        return currentHealth;
     }
 }
