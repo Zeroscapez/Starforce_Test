@@ -15,6 +15,7 @@ public class CardUI : MonoBehaviour, IPointerClickHandler
     {
     
         SetupCard();
+
     }
 
     void SetupCard()

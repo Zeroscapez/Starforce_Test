@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private InputAction moveAction;
     private InputAction gridAction;
     private InputAction blasterAction;
+    GridUnit gridUnit;
 
     void Awake()
     {
@@ -37,9 +38,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        // Set initial position to Tile 1
-        targetPosition = GridManager.Instance.gridTiles[currentTileIndex];
-        transform.position = targetPosition;
+        gridUnit = GetComponent<GridUnit>();
+
+
+        GridPosition startPos = new GridPosition(0, 1);
+
+        gridUnit.SetGridPosition(startPos);
     }
 
     void Update()
@@ -67,11 +71,11 @@ public class PlayerMovement : MonoBehaviour
         //If move is left move to the tile left of the current tile, if move is right move to the tile right of the current tile
         if (moveInput.x < 0)
         {
-            MoveToTile(currentTileIndex - 1);
+            MoveToTile(-1);
         }
         else if (moveInput.x > 0)
         {
-            MoveToTile(currentTileIndex + 1);
+            MoveToTile(1);
         }
       
     }
@@ -82,16 +86,24 @@ public class PlayerMovement : MonoBehaviour
         ManagerContainer.Instance.customScreenManager.buildCardGrid();
     }
 
-    private void MoveToTile(int newIndex)
+    private void MoveToTile(int direction)
     {
-        newIndex = Mathf.Clamp(newIndex, 0, 2); // Clamp to front row (0-2)
-        if (newIndex != currentTileIndex)
-        {
-            currentTileIndex = newIndex;
-            targetPosition = GridManager.Instance.gridTiles[currentTileIndex];
-            transform.position = targetPosition; // Snap immediately to the new tile
-        }
-      
+        int currentRow = gridUnit.CurrentGridPosition.row;
+        int newColumn = gridUnit.CurrentGridPosition.column + direction;
+
+        newColumn = Mathf.Clamp(newColumn, 0, GridManager.Instance.columns - 1); // Clamp to front row (0-2)
+
+        GridPosition newPos = new GridPosition(0, newColumn); // Row is always 0 for player
+
+        gridUnit.SetGridPosition(newPos);
+
+        //if (newIndex != currentTileIndex)
+        //{
+        //    currentTileIndex = newIndex;
+        //    targetPosition = GridManager.Instance.gridTiles[currentTileIndex];
+        //    transform.position = targetPosition; // Snap immediately to the new tile
+        //}
+
     }
 
    

@@ -251,7 +251,6 @@ MonoBehaviour:
   gridParent: {fileID: 0}
   cardPrefab: {fileID: 0}
   customScreen: {fileID: 0}
-  availableCards: []
   equippedCards: []
 --- !u!1 &376941310
 GameObject:
@@ -6270,7 +6269,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CustomScreenManager
   gridParent: {fileID: 1431254705}
   cardPrefab: {fileID: 2855347234044792964, guid: 0cb13a4881f8f174d8983984c1f743eb, type: 3}
-  availableCards: []
+  availableCards:
+  - {fileID: 11400000, guid: bcffa320cba3e74438a09833bfdb556b, type: 2}
   playerDeckStorage: {fileID: 1382339361}
   selectedCards: []
   chosenCards: []
@@ -6875,7 +6875,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3009081480244774621, guid: 4438aebc9eb9e45468da95ee347b7919, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2064189932}
   m_SourcePrefab: {fileID: 100100000, guid: 4438aebc9eb9e45468da95ee347b7919, type: 3}
 --- !u!114 &1327140124 stripped
 MonoBehaviour:
@@ -6932,6 +6935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3dedff4e3600f24eb57a0dcf273a2f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPosition: {x: 0, y: 0, z: 0}
   rows: 5
   columns: 3
   gridCellPrefab: {fileID: 6299464026452824365, guid: 61b433c95e583de489c1d78aff6b4e9d, type: 3}
@@ -7021,10 +7025,9 @@ MonoBehaviour:
   player: {fileID: 2064189931}
   ownedCards:
   - {fileID: 11400000, guid: bcffa320cba3e74438a09833bfdb556b, type: 2}
-  - {fileID: 11400000, guid: 3bf77cf38207df743b389525c5bdd169, type: 2}
-  - {fileID: 11400000, guid: 24ab616d56a238040931e612666bc82d, type: 2}
-  - {fileID: 11400000, guid: 79f8d0e1df8625540b7998fe5ef7b661, type: 2}
-  - {fileID: 11400000, guid: 3bf77cf38207df743b389525c5bdd169, type: 2}
+  - {fileID: 11400000, guid: bcffa320cba3e74438a09833bfdb556b, type: 2}
+  - {fileID: 11400000, guid: bcffa320cba3e74438a09833bfdb556b, type: 2}
+  - {fileID: 11400000, guid: bcffa320cba3e74438a09833bfdb556b, type: 2}
   - {fileID: 11400000, guid: bcffa320cba3e74438a09833bfdb556b, type: 2}
 --- !u!1 &1407011240
 GameObject:
@@ -8311,17 +8314,34 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2064189920 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3009081480244774621, guid: 4438aebc9eb9e45468da95ee347b7919, type: 3}
+  m_PrefabInstance: {fileID: 1293939985}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2064189931 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6007712878880977038, guid: 4438aebc9eb9e45468da95ee347b7919, type: 3}
   m_PrefabInstance: {fileID: 1293939985}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2064189920}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d126029055dde6444ac56d92df1ef9f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerActor
+--- !u!114 &2064189932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064189920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9af67cafe883b8429f56a9879d723fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridUnit
 --- !u!1001 &8720166812126958364
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8380,7 +8400,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3588249744253506143, guid: 6d34c1524d763644fbae3fd17f0cb7e6, type: 3}
       propertyPath: maxHealth
-      value: 10
+      value: 9999
       objectReference: {fileID: 0}
     - target: {fileID: 6147746921058410569, guid: 6d34c1524d763644fbae3fd17f0cb7e6, type: 3}
       propertyPath: m_fontAsset

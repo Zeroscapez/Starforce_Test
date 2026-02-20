@@ -1,8 +1,8 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Card", menuName = "Battle Card")]
-public class BattleCard : ScriptableObject
+//[CreateAssetMenu(fileName = "New Card", menuName = "Battle Card")]
+public abstract class BattleCard : ScriptableObject
 {
     [Header("Core Properties")]
     public string cardName;
@@ -21,9 +21,11 @@ public class BattleCard : ScriptableObject
     public TargetPattern targetPattern;
 
     public enum CardGrade { Standard, Mega, Giga, White }
-    public enum CardElement { Null, Aqua, Elec, Fire, Wood }
+  
     public enum TargetPattern { Single, Column, Row, All, Custom }
 
+    public abstract BattleCardInstance CreateInstance();
+   
     private void OnValidate()
     {
         // Update the color based on the grade.
@@ -48,3 +50,4 @@ public class BattleCard : ScriptableObject
         }
     }
 }
+public enum CardElement { Null, Aqua, Elec, Fire, Wood }

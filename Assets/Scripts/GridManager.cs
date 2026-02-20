@@ -7,6 +7,7 @@ public class GridManager : MonoBehaviour
     public static GridManager Instance;
 
     [Header("Grid Settings")]
+    public Vector3 playerPosition;
     public int rows = 5;          // Total rows (front to back)
     public int columns = 3;       // Total columns (left to right)
     private float cellSize = 3f;   // Spacing between tiles
@@ -101,9 +102,11 @@ public class GridManager : MonoBehaviour
 
     public int GetPlayerColumn(Vector3 position)
     {
+        
         float xPos = position.x;
         return Mathf.FloorToInt((xPos - gridOrigin.x) / cellSize);
     }
+
 
     public int GetNearestTileIndex(Vector3 position)
     {
@@ -129,6 +132,35 @@ public class GridManager : MonoBehaviour
         return Mathf.Clamp(column, 0, columns - 1);
     }
 
+    public int GetIndex(int row, int column)
+    {
+        return row * columns + column;
+    }
+
+    public GridPosition GetGridPositionFromWorld(Vector3 worldPos)
+    {
+        int column = GetColumnIndex(worldPos);
+
+        float relativeZ = worldPos.z - gridOrigin.z;
+        int row = Mathf.FloorToInt(relativeZ / cellSize);
+        row = Mathf.Clamp(row, 0, rows - 1);
+
+        return new GridPosition(row, column);
+    }
+
+    public GridPosition GetGridPositionFromIndex(int index)
+    {
+        int row = index / columns;
+        int column = index % columns;
+        return new GridPosition(row, column);
+    }
+
+    public Vector3 GetWorldPosition(int row, int column)
+    {
+        int index = GetIndex(row, column);
+        return gridTiles[index];
+    }
+
     public void ClearGrid()
     {
         foreach (GameObject cell in gridCellPool)
@@ -145,5 +177,17 @@ public class GridManager : MonoBehaviour
         {
             Gizmos.DrawWireCube(pos, Vector3.one * 0.5f);
         }
+    }
+}
+
+public struct GridPosition
+{
+    public int row;
+    public int column;
+
+    public GridPosition(int row, int column)
+    {
+        this.row = row;
+        this.column = column;
     }
 }
