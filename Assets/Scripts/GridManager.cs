@@ -23,7 +23,9 @@ public class GridManager : MonoBehaviour
 
     [Header("Grid Data")]
     public List<Vector3> gridTiles = new List<Vector3>(); // Center points of cells
-  
+
+    private Dictionary<(int row, int column), GameObject> occupants
+    = new Dictionary<(int, int), GameObject>();
 
     void Awake()
     {
@@ -168,7 +170,17 @@ public class GridManager : MonoBehaviour
             cell.SetActive(false);
         }
     }
+    public void RegisterUnit(GridUnit unit)
+    {
+        var pos = unit.CurrentGridPosition;
+        occupants[(pos.row, pos.column)] = unit.gameObject;
+    }
 
+    public GameObject GetOccupant(int row, int column)
+    {
+        occupants.TryGetValue((row, column), out GameObject unit);
+        return unit;
+    }
 
     void OnDrawGizmos()
     {
