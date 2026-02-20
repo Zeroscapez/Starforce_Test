@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Card", menuName = "Battle Card")]
@@ -35,9 +36,11 @@ public class BattleCard : ScriptableObject
             case CardGrade.Mega:
                 // Light blue (approximate RGB: 173,216,230)
                 colorIndicator = new Color(173f / 255f, 216f / 255f, 230f / 255f);
+
                 break;
             case CardGrade.Giga:
                 colorIndicator = Color.red;
+
                 break;
             case CardGrade.White:
                 colorIndicator = Color.white;

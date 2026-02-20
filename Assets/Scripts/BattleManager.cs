@@ -33,10 +33,15 @@ public class BattleManager : MonoBehaviour
     void Start()
     {
         EnemyHealth.Death += UnregisterEnemies;
-        if (player != null)
+        if (player == null)
         {
             Debug.LogWarning("Player Missing");
             Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
+            targetPosition = GridManager.Instance.gridTiles[1]; // Start at center tile
+            player.transform.position = targetPosition;
+        }
+        else
+        {
             targetPosition = GridManager.Instance.gridTiles[1]; // Start at center tile
             player.transform.position = targetPosition;
         }

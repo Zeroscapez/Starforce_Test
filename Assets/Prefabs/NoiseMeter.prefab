@@ -148,7 +148,6 @@ GameObject:
   - component: {fileID: 7245315920156429291}
   - component: {fileID: 5542679704828557871}
   - component: {fileID: 4529902815962731007}
-  - component: {fileID: 4942009725953610454}
   m_Layer: 5
   m_Name: NoiseMeter
   m_TagString: Untagged
@@ -214,19 +213,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4942009725953610454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7895230795778950468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e459acbb9898c44a9753b43a1c8dfa9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  noiseGauge: {fileID: 6773319987278403246}
-  noiseMeter: {fileID: 4529902815962731007}
-  totalNoise: 0
-  noiseFloor: 0

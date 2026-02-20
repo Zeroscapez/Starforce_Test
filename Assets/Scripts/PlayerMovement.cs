@@ -3,33 +3,36 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Movement")]
-    public float moveSpeed = 10f;
+
+    private PlayerBlaster playerBlaster;
 
     private int currentTileIndex = 1; // Start at center tile
     private Vector3 targetPosition;
 
     // Input System reference
-    private PlayerControls playerControls;
     private InputAction moveAction;
+    private InputAction gridAction;
+    private InputAction blasterAction;
 
     void Awake()
     {
-        // Initialize Input System
-        playerControls = new PlayerControls();
+    
         moveAction = InputSystem.actions.FindAction("Player/Move");
+        gridAction = InputSystem.actions.FindAction("Player/OpenCustomScreen");
     }
 
     void OnEnable()
     {
-       
-        moveAction.performed += HandleMovement;
+       moveAction.Enable();
+        gridAction.Enable();
+
     }
 
     void OnDisable()
     {
-        playerControls.Gameplay.Disable();
-        moveAction.performed -= HandleMovement;
+      moveAction?.Disable();
+        gridAction?.Disable();
+       
     }
 
     void Start()
@@ -41,14 +44,25 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-     
+        if(Time.timeScale == 1f)
+        {
+            if (gridAction.WasPressedThisFrame())
+            {
+                OpenCustomScreen();
+            }
+
+            if (moveAction.WasPressedThisFrame())
+            {
+                HandleMovement(moveAction.ReadValue<Vector2>());
+            }
+
+        }
+       
     }
 
     // Handle left/right input
-    private void HandleMovement(InputAction.CallbackContext context)
+    private void HandleMovement(Vector2 moveInput)
     {
-        Debug.Log("Move input received: " + context.ReadValue<Vector2>());
-        Vector2 moveInput = context.ReadValue<Vector2>();
 
         //If move is left move to the tile left of the current tile, if move is right move to the tile right of the current tile
         if (moveInput.x < 0)
@@ -60,6 +74,12 @@ public class PlayerMovement : MonoBehaviour
             MoveToTile(currentTileIndex + 1);
         }
       
+    }
+
+    private void OpenCustomScreen()
+    {
+        Debug.Log("Grid action triggered. Current battle state: " + BattleManager.Instance.BattleState);
+        ManagerContainer.Instance.customScreenManager.buildCardGrid();
     }
 
     private void MoveToTile(int newIndex)
